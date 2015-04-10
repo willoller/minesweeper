@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Minesweeper</title>
+
+        <!-- Bootstrap -->
+        <link href="demo/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style type="text/css">
+          body {
+            padding-top: 20px;
+            padding-bottom: 40px;
+          }
+
+          h1 {
+            text-align: center;
+          }
+
+          /* Custom container */
+          .container-narrow {
+            margin: 0 auto;
+            max-width: 700px;
+            text-align: center;
+          }
+          .container-narrow > hr {
+            margin: 30px 0;
+          }
+
+          /* Main marketing message and sign up button */
+          .jumbotron {
+            margin: 0;
+            background: white;
+            text-align: center;
+          }
+          .jumbotron h1 {
+            font-size: 48px;
+            line-height: 1;
+          }
+          .jumbotron .btn {
+            font-size: 21px;
+            padding: 14px 24px;
+          }
+
+          /* Supporting marketing content */
+          .marketing {
+            margin: 60px 0;
+          }
+          .marketing p + h4 {
+            margin-top: 28px;
+          }
+
+          button {
+            display: inline-block;
+            padding: 0;
+            height: 2em;
+            width: 2em;
+            border: 1px outset;
+            background: #888;
+            margin: 1px;
+            line-height: 0;
+            vertical-align: bottom;
+            font-weight: bold;
+          }
+          button.bomb {
+            background: red;
+          }
+          button.safe {
+            background: green;
+          }
+          button.clicked {
+            border: 1px inset;
+            background: #fff;
+          }
+
+          button.danger_1 { background: #ccc; color: green; }
+          button.danger_2 { background: #ccc; color: yellow-green; }
+          button.danger_3 { background: #ccc; color: yellow;}
+          button.danger_4 { background: #ccc; color: orange;}
+          button.danger_5 { background: #ccc; color: black; }
+          button.danger_6 { background: #ccc; color: blue;}
+          button.danger_7 { background: #ccc; color: purple; }
+          button.danger_8 { background: #ccc; color: red; }
+        </style>
+    </head>
+    <body>
+        <div class="container-narrow">
+
+        <div ng-app="minesweeper">
+          <div ng-controller="MinesweeperController">
+
+            <div class="masthead">
+                <h1 class="muted">{{title()}}</h1>
+                {{game.playableTiles}}
+            </div>
+
+            <div class="row" ng-repeat="rows in tiles">
+              <button ng-repeat="tile in rows" 
+                id="tile_{{tile.x}}_{{tile.y}}"
+                ng-class="tileClass(tile)"
+                ng-click="loop(tile)"
+                >{{showDanger(tile)}}
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        </div>
+
+    <script src="demo/js/angular.js"></script>
+    <script src="src/utility.js"></script>
+    <script src="src/minesweeper.js"></script>
+    <script src="demo/js/app.js"></script>
+
+    <footer>
+        &copy; 2015 Will Oller
+    </footer>
+  </body>
+</html>
