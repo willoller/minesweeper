@@ -3,10 +3,17 @@ angular.module('minesweeper', []);
 var app = angular.module('minesweeper');
 
 var MinesweeperController = ['$scope', '$q', function($scope, $q){
-    var minesweeper = new Minesweeper();
-    minesweeper.game.startGame(20, 20, 40);
-    $scope.game = minesweeper.game;
-    $scope.tiles = $scope.game.tiles;
+    $scope.height = 20;
+    $scope.width = 20;
+    $scope.bombs = 40;
+
+    $scope.resetGame = function(){
+        var minesweeper = new Minesweeper();
+        minesweeper.game.startGame($scope.height, $scope.width, $scope.bombs);
+        $scope.game = minesweeper.game;
+        $scope.tiles = $scope.game.tiles;
+    };
+    $scope.resetGame();
 
     $scope.title = function(){
         if ($scope.game.state == 'lose'){
@@ -60,38 +67,19 @@ var MinesweeperController = ['$scope', '$q', function($scope, $q){
 
 app.controller('MinesweeperController', MinesweeperController);
 
-app.directive('minesweeperTile', function(){
-    return {
-        restrict: 'A',
-        link: function link(scope, elem, attrs){
-
-            var tile = scope.tile;
-
-            scope.titleClass = function(){
-                console.log(elem);
-            }
-
-            if (tile.clicked){
-                elem.attr('disabled', 'disabled');
-                elem.addClass('clicked');
-
-                if (tile.danger) {
-                    elem.html(scope.tile.danger);
+app.directive('toggleColor', function($parse) {
+    return function(scope, element, attrs) {
+        var fn = $parse(attrs.ngRightClick);
+        element.bind('contextmenu', function(event) {
+            scope.$apply(function() {
+                event.preventDefault();
+                if (element.hasClass('color')){
+                    element.removeClass('color');
                 }
-            }
-
-            if (scope.game.state == 'lose') {
-                if (tile.isBomb){
-                    elem.addClass('bomb');
-                    elem.html('x');
+                else {
+                    element.addClass('color');
                 }
-            }
-
-            elem.bind("click", function(){
-                var tile = scope.tile;
-                scope.game.loop(tile);
-                scope.$apply();
             });
-        }
+        });
     };
 });

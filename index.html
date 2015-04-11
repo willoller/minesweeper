@@ -71,10 +71,13 @@
             font-weight: bold;
           }
           button.bomb {
-            background: red;
+            background: red !important;
           }
           button.safe {
-            background: green;
+            background: green !important;
+          }
+          button.color {
+            background: blue;
           }
           button.clicked {
             border: 1px inset;
@@ -92,13 +95,14 @@
         </style>
     </head>
     <body>
-        <div class="container-narrow">
-
-        <div ng-app="minesweeper">
+        <div ng-app="minesweeper" style="text-align: center;">
           <div ng-controller="MinesweeperController">
 
             <div class="masthead">
                 <h1 class="muted">{{title()}}</h1>
+                <p>&nbsp;
+                  <a href="#" ng-hide="game.state == 'ongoing'" ng-click="resetGame()">Try again!</a>
+                </p>
                 {{game.playableTiles}}
             </div>
 
@@ -107,13 +111,33 @@
                 id="tile_{{tile.x}}_{{tile.y}}"
                 ng-class="tileClass(tile)"
                 ng-click="loop(tile)"
+                toggle-color
                 >{{showDanger(tile)}}
               </button>
             </div>
 
-          </div>
-        </div>
 
+            <div class="well">
+              <div class="form-inline">
+                <div class="form-group">
+                  <label for="height">height:</label>
+                  <input id="height" ng-model="height" />
+                </div>
+                <div class="form-group">
+                  <label for="width">width:</label>
+                  <input id="width" ng-model="width" />
+                </div>
+                <div class="form-group">
+                  <label for="bombs">bombs:</label>
+                  <input id="bombs" ng-model="bombs" />
+                </div>
+                <div class="form-group">
+                  <a href="#" class="btn btn-default" ng-click="resetGame()">Reset</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
     <script src="demo/js/angular.js"></script>
