@@ -3,12 +3,13 @@
 The code is separated into 2 separate structures: the game and the display.
 
 The game engine sets up the playable landscape by:
-1) Taking in the game board height, width, and bomb count
-2) Generate all the bomb tiles
-3) Generate tiles to fill the rest of the board
-4) Randomly shuffle the array of tiles
-5) Turn the array of tiles into a matrix with the established height and width
-6) Calculate adjacent bombs and give each tile the result
+
+1. Taking in the game board height, width, and bomb count
+2. Generate all the bomb tiles
+3. Generate tiles to fill the rest of the board
+4. Randomly shuffle the array of tiles
+5. Turn the array of tiles into a matrix with the established height and width
+6. Calculate adjacent bombs and give each tile the result
 
 Tiles keep track of their own properties, including:
 - `(bool) clicked` - has the tile been clicked?
