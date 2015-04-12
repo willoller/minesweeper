@@ -1,5 +1,7 @@
 # Minesweeper Clone
 
+[Play the game](http://willoller.github.io/minesweeper/#)
+
 The code is separated into 2 separate structures: the game and the display.
 
 The game engine sets up the playable landscape by:
