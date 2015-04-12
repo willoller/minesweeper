@@ -22,6 +22,8 @@ The game engine has a `loop()` function which is run every time a tile is clicke
 It prevents tiles from being clicked after the game has been lost.
 If the tile clicked is a bomb, the game ends in a loss. Otherwise, the tile is set to clicked, and if the tile has no danger, all adjacent tiles are also processed by `loop()`.
 
+The "win" condition is handled by keeping track of all the un-clicked "safe" tiles. When that number goes down to 0, you win!
+
 All the display attributes are handled by the other part of the application, written with Angular.
 
 One part of the gameplay which I implemented in the display side is the right-click flagging feature. I decided to keep this in the display so other frontend implementations could have multiple flags (like the original windows) or no flags (to make it even harder).
